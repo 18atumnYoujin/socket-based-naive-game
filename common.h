@@ -1,6 +1,8 @@
 #ifndef COMMON_H
 #define COMMON_H
 
+#define VERSION "v1.3.4"
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
@@ -10,6 +12,10 @@
 #include <sys/ioctl.h>
 #include <unistd.h>
 #include <termios.h>
+
+#ifndef bool
+#define bool _Bool
+#endif
 
 #ifndef false
 #define false 0
@@ -123,9 +129,9 @@
 #define BATTLE_W (SCR_W)
 #define BATTLE_H (SCR_H - 2)
 
-#define USERNAME_SIZE  7
+#define USERNAME_SIZE  12
 #define MSG_SIZE 40
-#define USER_CNT   5
+#define USER_CNT   10
 
 #define PASSWORD_SIZE USERNAME_SIZE
 
@@ -141,8 +147,6 @@
 #define MAX_OTHER 15
 
 #define MAX_ITEM (USER_CNT * (MAX_BULLETS) + MAX_OTHER)
-
-#define PORT 50000
 
 enum {
 	CLIENT_COMMAND_USER_QUIT,
@@ -162,6 +166,11 @@ enum {
 	CLIENT_COMMAND_MOVE_LEFT,
 	CLIENT_COMMAND_MOVE_RIGHT,
 	CLIENT_COMMAND_FIRE,
+	CLIENT_COMMAND_FIRE_UP,
+	CLIENT_COMMAND_FIRE_DOWN,
+	CLIENT_COMMAND_FIRE_LEFT,
+	CLIENT_COMMAND_FIRE_RIGHT,
+	CLIENT_MESSAGE_FATAL,
 	CLIENT_COMMAND_END,
 };
 
@@ -204,6 +213,9 @@ enum {
 	SERVER_MESSAGE_YOU_GOT_BLOOD_VIAL,
 	SERVER_MESSAGE_YOU_GOT_MAGAZINE,
 	SERVER_MESSAGE_YOUR_MAGAZINE_IS_EMPTY,
+
+    SERVER_MESSAGE_QUIT,
+    SERVER_MESSAGE_FATAL,
 };
 
 enum {
@@ -287,5 +299,31 @@ typedef struct server_message_t {
 		}; // for message
 	};
 } server_message_t;
+
+#define BLACK                "\e[0;30m"
+#define L_BLACK              "\e[1;30m"
+#define RED                  "\e[0;31m"
+#define L_RED                "\e[1;31m"
+#define GREEN                "\e[0;32m"
+#define L_GREEN              "\e[1;32m"
+#define BROWN                "\e[0;33m"
+#define YELLOW               "\e[1;33m"
+#define BLUE                 "\e[0;34m"
+#define L_BLUE               "\e[1;34m"
+#define PURPLE               "\e[0;35m"
+#define L_PURPLE             "\e[1;35m"
+#define CYAN                 "\e[0;36m"
+#define L_CYAN               "\e[1;36m"
+#define GRAY                 "\e[0;37m"
+#define WHITE                "\e[1;37m"
+#define BOLD                 "\e[1m"
+#define UNDERLINE            "\e[4m"
+#define BLINK                "\e[5m"
+#define REVERSE              "\e[7m"
+#define HIDE                 "\e[8m"
+#define CLEAR                "\e[2J"
+#define CLRLINE              "\r\e[K"
+#define NONE                 "\e[0m"
+
 
 #endif
